@@ -12,7 +12,7 @@ cat $1 | jq -c 'to_entries[]' |
 while read -r c;
 do
     key=$(echo "$c" | jq -r '.key')
-    value=$(echo "$c" | jq -r '.value.value')
+    value=$(echo "$c" | jq -r '.value')
     echo aws ssm put-parameter --name "$key" --value "$value" --type String --overwrite
     aws ssm put-parameter --name "$key" --value "$value" --type String --overwrite | cat
 done
